@@ -1,4 +1,4 @@
-# MAC 
+# MAC
 
 - M(edia) A(ccess) C(ontrol)
   - Permanent
@@ -13,4 +13,3 @@ Why change the MAC Address?
 - Increase anonymity
 - Impersonate other devices (man in the middle)
 - Bypass filters specific to devices
-
