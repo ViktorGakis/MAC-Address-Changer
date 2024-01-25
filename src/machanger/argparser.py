@@ -14,10 +14,12 @@ class CompatibleArgParser:
 
     def add_option(self, *args, **kwargs):
         if hasattr(self.parser, 'add_argument'):
-            # argparse
+            # argparse (Python 3.x)
             self.parser.add_argument(*args, **kwargs)
         else:
-            # optparse
+            # optparse (Python 2.x)
+            # Remove the 'required' argument if present, as it's not supported in optparse
+            kwargs.pop('required', None)
             self.parser.add_option(*args, **kwargs)
 
     def parse_args(self):

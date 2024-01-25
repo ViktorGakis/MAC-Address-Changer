@@ -46,3 +46,25 @@ class ArgParser:
     def parse_args(self):
         return self.parser.parse_args()
 ```
+
+## Testing
+
+To test the package the recommended method is to install it in development mode. Assuming that there exists the setup.py file as in our case
+
+```python
+pip install -e .
+```
+
+### Note on Python System Version Mocking
+
+Mocking the system version is enabled by using the mock functionality of pytest and mimicking the type of the sys.version_info which is a namedtuple as follows
+
+```python
+from unittest.mock import patch
+from collections import namedtuple
+
+MockVersionInfo = namedtuple('version_info', ['major', 'minor', 'micro', 'releaselevel', 'serial'])
+
+with patch('sys.version_info', new=MockVersionInfo(2, 7, 0, 'final', 0)):
+  # whatever follows asumes 
+```

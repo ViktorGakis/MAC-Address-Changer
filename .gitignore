@@ -3,3 +3,5 @@ __pycache__/
 venv/
 .venv/
 .vscode
+.pytest_cache
+my_package.egg-info
