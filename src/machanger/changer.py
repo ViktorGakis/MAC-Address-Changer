@@ -5,7 +5,7 @@ def ifconfig():
     return sp.call("ifconfig", shell=True)
 
 
-def ifconfig_change(interface: str, new_mac: str):
+def ifconfig_change(interface: str, new_mac: str) -> None:
     sp.call(["ifconfig", interface, "down"])
     sp.call(["ifconfig", interface, "hw ether", new_mac])
     sp.call(["ifconfig", interface, "up"])

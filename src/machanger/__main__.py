@@ -1,18 +1,14 @@
-from .argparser import ArgParser
-from .changer import change_mac
+from .pipeline import Pipeline
 
 
 def main() -> None:
-    # Create an ArgParser instance and add options
-    parser = ArgParser()
-    parser.add_options()
+    pipeline = Pipeline()
 
-    # Parse command line arguments
-    args = parser.parse_args()
+    pipeline.handle_arg_parsing()
 
-    # Perform actions based on parsed arguments
-    if args.interface:
-        print(f"Changing MAC address for interface {args.interface}")
+    pipeline.handle_arg_validation()
+
+    pipeline.handle_changing_mac()
 
 
 if __name__ == "__main__":
