@@ -5,10 +5,10 @@ def ifconfig():
     return sp.call("ifconfig", shell=True)
 
 
-def ifconfig_change(device: str, new_mac_address: str):
-    sp.call(["ifconfig", device, "down"])
-    sp.call(["ifconfig", device, "hw ether", new_mac_address])
-    sp.call(["ifconfig", device, "up"])
+def ifconfig_change(interface: str, new_mac: str):
+    sp.call(["ifconfig", interface, "down"])
+    sp.call(["ifconfig", interface, "hw ether", new_mac])
+    sp.call(["ifconfig", interface, "up"])
 
 
 def change_mac(interface: str, new_mac: str) -> bool:
@@ -23,8 +23,7 @@ def change_mac(interface: str, new_mac: str) -> bool:
         bool: True if the MAC address was successfully changed, False otherwise.
     """
     try:
-        # implement changing mac address logic
-        pass
+        ifconfig_change(interface, new_mac)
     except Exception as e:
         print(f"An error occurred: {e}")
         return False

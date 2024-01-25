@@ -1,5 +1,7 @@
 import sys
 
+from .config import Config
+
 
 class CompatibleArgParser:
     """Checks the python version of the system and imports the proper arg parsers"""
@@ -44,13 +46,8 @@ class ArgParser:
         self.parser = CompatibleArgParser()
 
     def add_options(self) -> None:
-        self.parser.add_option(
-            "-i",
-            "--interface",
-            dest="interface",
-            help="Interface to have its MAC address changed",
-            required=True,
-        )
+        for opt in Config.parser_options:
+            self.parser.add_option(*opt.get("args"), **opt.get("kwds"))
 
     def parse_args(self, args=None):  # -> Namespace | Any:
         return self.parser.parse_args(args)
