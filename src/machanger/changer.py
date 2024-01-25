@@ -4,13 +4,14 @@ import subprocess as sp
 def ifconfig():
     return sp.call("ifconfig", shell=True)
 
-def ifconfig_change(device:str, new_mac_address:str):
-    sp.call(["ifconfig", device, 'down'])
-    sp.call(["ifconfig", device, 'hw ether', new_mac_address])
-    sp.call(["ifconfig", device, 'up'])
+
+def ifconfig_change(device: str, new_mac_address: str):
+    sp.call(["ifconfig", device, "down"])
+    sp.call(["ifconfig", device, "hw ether", new_mac_address])
+    sp.call(["ifconfig", device, "up"])
 
 
-def change_mac(interface: str, new_mac: str):
+def change_mac(interface: str, new_mac: str) -> bool:
     """
     Changes the MAC address of a given network interface.
 

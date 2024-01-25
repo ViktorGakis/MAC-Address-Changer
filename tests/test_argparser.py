@@ -1,28 +1,37 @@
-import sys
+from io import StringIO
 from unittest.mock import patch
-from machanger.argparser import ArgParser
-from collections import namedtuple
 
-# Create a mock version_info named tuple
-MockVersionInfo = namedtuple('version_info', ['major', 'minor', 'micro', 'releaselevel', 'serial'])
+import pytest
 
-def test_argparser_python2():
-    # Mock sys.version_info to simulate Python 2.x
-    with patch('sys.version_info', new=MockVersionInfo(2, 7, 0, 'final', 0)):
-        parser = ArgParser()
-        parser.add_options()
-        with patch('sys.argv', ['script_name', '-i', 'eth0']):
-            options, _ = parser.parse_args()
-            assert options.interface == 'eth0'
+from machanger.argparser import ArgParser, CompatibleArgParser
 
 
-def test_argparser_python3():
-    # Mock sys.version_info to simulate Python 3.x
-    with patch('sys.version_info', new=MockVersionInfo(3, 8, 0, 'final', 0)):
-        parser = ArgParser()
-        parser.add_options()
-        with patch('sys.argv', ['script_name', '-i', 'eth0']):
-            args = parser.parse_args()
-            assert args.interface == 'eth0'
+def test_argparser_python2(mock_python2_env) -> None:
+    parser = CompatibleArgParser()
+    assert hasattr(parser.parser, "add_option")
 
 
+def test_argparser_python3(mock_python3_env) -> None:
+    parser = CompatibleArgParser()
+    assert hasattr(parser.parser, "add_argument")
+
+
+def help_argument(environment) -> None:
+    with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
+        with pytest.raises(SystemExit) as e:
+            parser = ArgParser()
+            parser.add_options()
+            parser.parse_args(["--help"])
+
+        assert e.type == SystemExit
+        assert e.value.code == 0
+        help_output = mock_stdout.getvalue()
+        assert "Interface to have its MAC address changed" in help_output
+
+
+def test_help_argument2(mock_python2_env) -> None:
+    help_argument(mock_python2_env)
+
+
+def test_help_argument3(mock_python3_env) -> None:
+    help_argument(mock_python3_env)
