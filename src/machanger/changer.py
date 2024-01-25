@@ -1,7 +1,7 @@
 import subprocess as sp
 
 
-def ifconfig():
+def ifconfig() -> int:
     return sp.call("ifconfig", shell=True)
 
 
