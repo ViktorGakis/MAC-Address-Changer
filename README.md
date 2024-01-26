@@ -1,4 +1,4 @@
-# MAC
+## MAC
 
 - M(edia) A(ccess) C(ontrol)
   - Permanent
@@ -14,7 +14,38 @@ Why change the MAC Address?
 - Impersonate other devices (man in the middle)
 - Bypass filters specific to devices
 
-# Developing the application
+## Developing the application
+
+The application will be developed as CLI tool that will accept the device name and a new MAC address as arguments.
+
+```bash
+python machanger <device_name> <new_MAC_address>
+```
+
+## Application structure
+
+```python
+.
+|-- LICENCE
+|-- README.md
+|-- requirements.txt
+|-- setup.py
+|-- src
+|   |-- __init__.py
+|   `-- machanger
+|       |-- __init__.py
+|       |-- __main__.py
+|       |-- argparser.py
+|       |-- argvalidator.py
+|       |-- changer.py
+|       |-- config.py
+|       `-- pipeline.py
+`-- tests
+    |-- conftest.py
+    |-- test_argparser.py
+    |-- test_help.py
+    `-- test_options.py
+```
 
 ## ArgParser
 

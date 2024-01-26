@@ -30,4 +30,4 @@ class Pipeline:
     def handle_changing_mac(self):
         if self.new_mac and self.interface:
             print("Changing Mac Addressu")
-            # change_mac(self.interface, self.new_mac)
+            change_mac(self.interface, self.new_mac)
