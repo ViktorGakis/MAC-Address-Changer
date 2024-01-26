@@ -1,6 +1,6 @@
 from .argparser import ArgParser
-from .argvalidator import ArgValidator
-from .changer import change_mac, check_new_mac_against_current, get_current_mac
+from .changer import change_mac, get_current_mac
+from .validators import ArgValidator
 
 
 class Pipeline:

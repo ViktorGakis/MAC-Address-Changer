@@ -51,26 +51,3 @@ def change_mac(interface: str, new_mac: str) -> bool:
         return False
     else:
         return True
-
-
-def check_new_mac_address_validity(new_mac: str):
-    valid_mac_address = re.search(rf"{MAC_ADDRESS_REGX_PATTERN}", new_mac)
-    if valid_mac_address:
-        return True
-    return False
-
-
-def check_new_mac_against_current(new_mac, current_mac) -> bool:
-    if new_mac == current_mac:
-        print(
-            f"- The current MAC address {current_mac} is the same as the one to be changed too {new_mac}."
-        )
-        return False
-    return True
-
-
-def validate_mac_change(interface: str, new_mac: str, current_mac: str):
-    if new_mac == current_mac:
-        print(
-            f"- MAC address changed from {current_mac} to {new_mac} for interface: {interface}"
-        )
