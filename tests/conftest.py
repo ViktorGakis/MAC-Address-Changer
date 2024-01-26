@@ -2,7 +2,6 @@ from collections import namedtuple
 from unittest.mock import patch
 
 import pytest
-
 from machanger.config import Config
 
 # Create a mock version_info named tuple

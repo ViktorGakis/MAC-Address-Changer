@@ -6,3 +6,4 @@ class ArgValidator:
         elif not args.new_mac:
             print("- Please specify the new mac address as -m <mac_address>")
         return True
+
