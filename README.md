@@ -4,7 +4,7 @@
   - Permanent
   - Physical
   - Unique
-- Assigned by manufacturer
+- Assigned by the manufacturer
 
 The MAC address is used in the network in order to transfer data as a unique identifier.
 

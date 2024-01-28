@@ -1,11 +1,13 @@
 from .argparser import ArgParser
 from .changer import change_mac, get_current_mac
-from .validators import ArgValidator
+from .validators import ArgValidator, MacComparer, MacValidator
 
 
 class Pipeline:
     def __init__(self) -> None:
         self.parser = ArgParser()
+        self.mac_validate = MacValidator()
+        self.mac_compare = MacComparer()
         self.proceed_mac_change = False
         self.current_mac = ""
 
@@ -34,8 +36,8 @@ class Pipeline:
             self.current_mac: str | None = get_current_mac(self.interface)
 
     def pre_change_mac_validation(self):
-        if self.current_mac:
-            if check_new_mac_against_current(self.new_mac, self.current_mac):
+        if self.current_mac and self.new_mac:
+            if self.mac_compare.compare(self.new_mac, self.current_mac):
                 self.proceed_mac_change = True
                 print("- Args are valid, proceeding in changing the MAC address....")
 

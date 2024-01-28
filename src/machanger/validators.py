@@ -16,13 +16,18 @@ class ArgValidator:
 class MacValidator:
     @staticmethod
     def validator(new_mac: str) -> bool:
+        """checks if the MAC address is actually a valid form of a MAC address"""
+
         valid_mac_address = re.search(rf"{MAC_ADDRESS_REGX_PATTERN}", new_mac)
         if valid_mac_address:
             return True
         return False
 
+
+class MacComparer:
     @staticmethod
     def compare(new_mac: str, current_mac: str) -> bool:
+        """compares two MAC addresses"""
         if new_mac == current_mac:
             print(
                 f"- The current MAC address {current_mac} is the same as the one to be changed too {new_mac}."
