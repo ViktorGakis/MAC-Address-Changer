@@ -97,5 +97,5 @@ from collections import namedtuple
 MockVersionInfo = namedtuple('version_info', ['major', 'minor', 'micro', 'releaselevel', 'serial'])
 
 with patch('sys.version_info', new=MockVersionInfo(2, 7, 0, 'final', 0)):
-  # whatever follows asumes 
+  # whatever follows assumes that the python version is 2.7.0
 ```

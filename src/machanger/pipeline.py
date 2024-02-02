@@ -55,4 +55,4 @@ class Pipeline:
 
         self.pre_change_mac_validation()
 
-        # pipeline.handle_changing_mac()
+        self.handle_changing_mac()
